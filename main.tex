@@ -1,0 +1,23 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[table]{xcolor}
+% Include the preamble settings via the \input command
+\input{thesis.permeable.tex}
+\input{styles.sty}
+
+\begin{document}
+
+\maketitle % This applies the title page settings
+
+% Immediately after \maketitle, clear the page and reset the page style for the rest of the document
+\clearpage % Clear the page to ensure the page style is applied from here on
+\pagestyle{fancy} % Apply the fancy header and footer style
+
+% Include your content sections
+\input{Content}
+
+\newpage
+\bibliography{references}
+\bibliographystyle{ieeetr}
+
+\input{appendix}
+\end{document}

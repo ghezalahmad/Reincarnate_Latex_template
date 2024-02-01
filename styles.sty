@@ -1,0 +1,134 @@
+% Existing style settings
+\setlength{\jot}{10pt}
+\setlength{\intextsep}{10mm}
+\setlength{\parindent}{0em}
+\setlength{\parskip}{1em}
+
+% Include required packages
+\usepackage{fancyhdr}
+\usepackage{graphicx} % If not already included
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage{tocloft} 
+\usepackage{titletoc} % Load the titletoc package
+\usepackage{array} % Ensure this package is included
+\usepackage{hyperref} % Include the hyperref package
+
+% Define custom colors
+\definecolor{headerblue}{RGB}{70, 130, 180} % Adjust the RGB values to your specific shade of blue
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=darkblue,   % Set TOC link color to blue
+    citecolor=blue,   % Set citation link color to blue
+    urlcolor=blue,    % Set URL link color to blue
+}
+
+\renewcommand{\cfttoctitlefont}{\large\bfseries\color{darkblue}}
+
+
+% Keep the section and subsection entries in black (not bold)
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsubsecfont}{\normalfont}
+
+% Customize the appearance of the "List of Figures" section heading
+\titlecontents{lof}
+  [0pt]                      % Left margin
+  {\vspace{1pt}\color{darkblue}\bfseries} % Formatting for the heading
+  {\contentslabel{2em}}      % Label width
+  {}                         % Empty space before the title
+  {\titlerule*[0.5pc]{.}\contentspage} % Formatting for the page number
+\renewcommand{\listfigurename}{\color{darkblue}List of Figures} % Change the section heading
+
+\titlecontents{lot}
+  [0pt]
+  {\vspace{10pt}\color{blue}\bfseries}
+  {\contentslabel{2em}}
+  {}
+  {\titlerule*[0.5pc]{.}\contentspage}
+\renewcommand{\listtablename}{\color{darkblue}List of Tables}
+
+\definecolor{shadecolor}{RGB}{229,232,237} % Define your color
+% Define custom colors
+\definecolor{customblue}{RGB}{102 153 204} % Adjust the RGB values to your specific shade of blue
+% Define custom colors
+\definecolor{linecolor}{RGB}{169, 175, 232} % This will be used for both the header text and line
+% Define a page style for the cover page without the header line
+\fancypagestyle{coverstyle}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+}
+
+
+% Adjust the width of the parbox in the 'europeanfooter' style to avoid overlap
+\fancypagestyle{europeanfooter}{
+    \fancyhf{}
+    \renewcommand{\headrulewidth}{0pt}
+    \renewcommand{\footrulewidth}{0pt}
+    \fancyfoot[L]{\includegraphics[height=1.3cm]{images/eu_flag.jpg}}
+    \fancyfoot[R]{%
+        \parbox[b]{10cm}{% Reduced width to 10cm; adjust as needed
+            \color{customblue}\fontsize{8pt}{9pt}\selectfont This project has received funding from the European Union’s Horizon Europe research and innovation programme under grant agreement nº 101056773. This document reflects only the author’s view and the EU Commission is not responsible for any use that may be made of the information it contains.
+        }
+    }
+}
+
+% Custom maketitle command for the title page
+\def\maketitle{
+    \begin{titlepage}
+        \thispagestyle{europeanfooter} % Apply the 'europeanfooter' style to the title page
+        \noindent\includegraphics[width=0.45\textwidth]{images/reincarnate.png}
+        % Right-aligned image with title overlay
+        \begin{tikzpicture}[remember picture,overlay]
+            \node[anchor=north east, inner sep=0pt, yshift=-11cm] at (current page.north east) (image) {\includegraphics[width=17.93cm, height=12.33cm]{images/Picture3.png}};
+            \node[font=\fontsize{26}{31}\selectfont\color{white}, text width=17.93cm, align=center, yshift=-0.165cm] at (image.center) {\textbf{D2.3 Material upgrade and reinforcement}};
+        \end{tikzpicture}
+    \end{titlepage}
+}
+
+
+
+
+
+
+% Custom header and footer for the rest of the document
+\fancyhf{} % Clear all header and footer fields
+\renewcommand{\headrulewidth}{0pt} % No default line
+
+\fancyhead[L]{%
+    \textcolor{linecolor}{\textbf{D2.3 Material upgrade and reinforcement}} % Apply the dark blue color to the project title
+}
+
+% Draw a blue line in the header
+\fancyhead[R]{%
+    \begin{tikzpicture}[remember picture,overlay]
+        \draw[linecolor, thick] ([xshift=\dimexpr\textwidth-13.4cm\relax, yshift=-8ex]current page.north west) -- ([yshift=-8ex]current page.north east);
+    \end{tikzpicture}%
+}
+
+% Define the white color for the page number, if not already defined
+\definecolor{white}{RGB}{255, 255, 255}
+
+% Custom footer setup
+%\fancyhf{}  % Clear all header and footer fields to start fresh
+\renewcommand{\footrulewidth}{0pt}  % No footer rule
+
+% Footer setup with image and page number
+\fancyfoot[C]{%
+    \begin{tikzpicture}[overlay, remember picture]
+        % Footer image
+        \node[inner sep=0pt, anchor=south east, yshift=1cm] at (current page.south east) {\includegraphics[width=.88\paperwidth]{images/footer.png}};
+        
+        % Semi-transparent white overlay
+        % Adjust the 'yshift' and 'xshift' if needed to cover the image area
+        \fill[white, opacity=0.5] ([yshift=1cm]current page.south west) rectangle ([yshift=2cm]current page.south east);
+        
+        % Page number on top of the footer image and overlay
+        \node[anchor=south, yshift=1.cm, text=white] at (current page.south) {\thepage};
+    \end{tikzpicture}%
+}
+
+
+\pagestyle{fancy}  % Apply the fancy style
+
